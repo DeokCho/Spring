@@ -70,8 +70,9 @@ footer {
 </style>
 </head>
 <body>
+
 <header>
-  <h2>회원가입</h2>
+  <h2>회원 가입</h2>
 </header>
 
 <section>
@@ -131,10 +132,9 @@ $('#join-button').click(function(){
 				addr: $('#addr').val()}),
 		dataType: 'json',
 		contentType: 'application/json',
-		
 		success: function(message){
 			if(message === 'SUCCESS'){
-				location.href="index.html"
+				location.href="../index.html"
 			}else{
 				location.href="join.html"
 			}

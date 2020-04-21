@@ -1,4 +1,4 @@
-package com.occamsrazor.web.member;
+package test.member;
 
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ public class MemberServiceImpl implements MemberService{
 		members = new Member[5];
 		count = 0;
 	}
-
+	
 	@Override
 	public void add(Member member) {
 		members[count] = member;
@@ -19,19 +19,19 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member[] list(Member member) {
+	public Member[] list() {
 		return members;
 	}
 
 	@Override
 	public Member detail(String userid) {
-		Member member = null;
+		Member returnDetail = null;
 		for(int i=0; i<count; i++) {
-			if(userid.equals(members[i].getUserid())) {
-				member = members[i];
+			if(userid.equals(members[i].getName())) {
+				returnDetail = members[i];
 			}
 		}
-		return member;
+		return returnDetail;
 	}
 
 	@Override
@@ -44,7 +44,6 @@ public class MemberServiceImpl implements MemberService{
 		for(int i=0; i<count; i++) {
 			if(member.getUserid().equals(members[i].getUserid())) {
 				members[i].setPasswd(member.getPasswd());
-				break;
 			}
 		}
 	}
@@ -52,11 +51,10 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void delete(Member member) {
 		for(int i=0; i<count; i++) {
-			if(member.getUserid().equals(members[i].getUserid())
-					&&
+			if(member.getUserid().equals(members[i].getUserid()) && 
 					member.getPasswd().equals(members[i].getPasswd())) {
 				members[i] = members[count-1];
-				members[count-1]=null;
+				members[count-1] = null;
 				count--;
 			}
 		}
@@ -66,8 +64,7 @@ public class MemberServiceImpl implements MemberService{
 	public boolean login(Member member) {
 		boolean ok = false;
 		for(int i=0; i<count; i++) {
-			if(member.getUserid().equals(members[i].getUserid())
-					&&
+			if(member.getUserid().equals(members[i].getUserid()) &&
 					member.getPasswd().equals(members[i].getPasswd())) {
 				ok = true;
 				break;
@@ -75,5 +72,4 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return ok;
 	}
-	
 }

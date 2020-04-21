@@ -1,4 +1,4 @@
-package com.occamsrazor.web.member;
+package test.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,10 +16,8 @@ import com.occamsrazor.web.uitl.Messenger;
 public class MemberController {
 	@Autowired MemberService memberService;
 	
-	@PostMapping("/join")
 	public Messenger add(@RequestBody Member member) {
 		int current = memberService.count();
-		memberService.add(member);
 		return (memberService.count() == (current+1))? Messenger.SUCCESS : Messenger.FAIL;
 	}
 	@PostMapping("/login")
@@ -33,8 +31,8 @@ public class MemberController {
 	}
 	@GetMapping("/detail")
 	public Member detail(@RequestBody Member member) {
-		Member returnMember = new Member();
-		return returnMember;
+		Member returnDetail = new Member();
+		return returnDetail;
 	}
 	@GetMapping("/count")
 	public int count() {
@@ -42,13 +40,14 @@ public class MemberController {
 		return count;
 	}
 	@PutMapping("/update")
-	public Member update(@RequestBody Member member) {
-		Member returnMember = new Member();
-		return returnMember;
+	public Member update(Member member) {
+		Member returnUpdate = new Member();
+		return returnUpdate;
 	}
 	@DeleteMapping("/delete")
-	public Member delete(@RequestBody Member member) {
-		Member returnMember = new Member();
-		return returnMember;
+	public Member delete(Member member) {
+		Member returnDelete = new Member();
+		return returnDelete;
 	}
+	
 }

@@ -1,4 +1,4 @@
-package com.occamsrazor.web.member;
+package test.member;
 
 import lombok.Data;
 
