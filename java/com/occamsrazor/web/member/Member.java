@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class Member {
-	private String name, userid, passwd, ssn, addr;
+	private String name, userId, passwd, ssn, addr;
 }

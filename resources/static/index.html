@@ -78,20 +78,19 @@ footer {
 <section>
   <nav>
     <ul>
-      <li><a id="join_a" >Join</a></li>
-      <li><a id="login_a" >Login</a></li>
+      <li><a id="join_a">Join</a></li>
+      <li><a id="login_a">Login</a></li>
     </ul>
   </nav>
   
   <article>
    <form action="#">
    	<label>ID </label> <br>
-   	<input id="userid" type="text"> <br>
+   	<input id="userId" type="text"> <br>
    	<label>PASSWORD</label><br>
    	<input id="passwd" type="text"><br>
    	<input id="login-button" type="button" value="로그인">
    	<input id="cancel-button" type="button" value="취소">
-   	
    </form>
   </article>
 </section>
@@ -99,50 +98,56 @@ footer {
 <footer>
   <p>Footer</p>
 </footer>
-<script>
-$('#join_a').css('cursor', 'pointer')
 
+<script type="text/javascript">
 $('#join_a')
-	.css('cursor', 'pointer')
-	.click(e=> {
-		e.preventDefault()
-		location.href=href="member/join.html"
+.css('cursor','pointer')
+.click(e=>{
+	e.preventDefault()
+	location.href = "member/join.html"
 })
 
 $('#login_a')
 	.css('cursor', 'pointer')
-	.click(e=> {
+	.click(e => {
 		e.preventDefault()
-		location.href=href="index.html"
-})
-
-
-$('#login-button').click(e=> {
-	e.preventDefault()
-	$.ajax({
-		url: '/member/login',
-		type: 'post',
-		data: JSON.stringify(
-				{userid: $('#userid').val(),
-				 passwd: $('#passwd').val()}),
-		dataType: 'json',
-		contentType: 'application/json',
-		success : d =>{
-			if(message === 'SUCCESS'){
-				location.href = "grade/register.html"
-			}else{
-				alert('다시 로그인 해주세요')
-				location.href = "index.html"
+		location.href="index.html"
+		})
+		
+$('#login-button')
+	.css('cursor', 'pointer')
+	.click(e=>{
+		e.preventDefault()
+		$.ajax({
+			url : '/member/login',
+			type : 'post',
+			data : ({
+				userId : $("#userId").val(),
+				passwd : $("#passwd").val()
+			}),
+			dataType : 'JSON',
+			contentType : 'application/json',
+			success : (d=> {
+				if(d==='SUCCESS'){
+					alert('로그인 성공')
+				}else{
+					alert('로그인 실패')
+					location.href = "index.html"
+				}
+			}),
+			error : (request, status, error)=>{
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
 			}
-		},
-		error: (request,status,error)=>{
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
-		}
+		})
 	})
-})
-$('#cancel-button').click(e=>{
-	alert('취소버튼 클릭')
-})
+
+$('#cancel-button')
+	.css('cursor', 'pointer')
+	.click(e=>{
+		e.preventDefault()
+		location.href="index.html"
+	})
+
 </script>
 </body>
 </html>

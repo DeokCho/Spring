@@ -1,12 +1,9 @@
 package com.occamsrazor.web.member;
 
+import com.occamsrazor.web.uitl.Messenger;
+
 public interface MemberService {
+	public int count() ;
 	public void add(Member member);
-	public Member[] list(Member member);
-	public Member detail(String userid);
-	public int count();
 	public boolean login(Member member);
-	public void update(Member member);
-	public void delete(Member member);
-	
 }
