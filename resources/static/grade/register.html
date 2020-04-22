@@ -75,62 +75,75 @@ footer {
 		<h2>점수 등록</h2>
 	</header>
 
-	<section>
-		<nav>
-			<ul>
-
-			</ul>
-		</nav>
-
-		<article>
-			<form action="#">
-				<label>ID</label> <br> 
-				<input id="userid" type="text" /> <br>
-				<label>Korean</label><br> 
-				<input id="korean" type="text" /><br>
-				<label>English</label><br> 
-				<input id="english" type="text" /><br>
-				<label>Math</label><br> 
-				<input id="math" type="text"><br>
-				<label>Java</label><br> 
-				<input id="java" type="text"><br>
-				<br> 
-				<input id="register-button" type="button" value="점수 등록">
-			   	<input id="confirm-button" type="button" value="점수 확인">
-
-			</form>
-		</article>
-	</section>
+<section>
+  <nav>
+    <ul>
+    
+    </ul>
+  </nav>
+  
+  <article>
+   <form action="#">
+   	<label>ID </label> <br>
+   	<input id="userid" type="text"/> <br>
+   	<label>Korean</label><br>
+   	<input id="korean" type="text"/><br>
+   	<label>English</label><br>
+   	<input id="english" type="text"/><br>
+   	<label>Math</label><br>
+   	<input id="math" type="text"><br>
+   	<label>Java</label><br>
+   	<input id="java" type="text"><br><br>
+   	<input id="register_button" type="button" value="점수 등록">
+   	<input id="credit_button" type="button" value="학점 보기">
+   </form>
+   <div id="result"></div>
+  </article>
+</section>
 
 	<footer>
 		<p>Footer</p>
 	</footer>
-	<script type="text/javascript">
-		$('register-button').click(function() {
-			$.ajax({
-				url : '/report/register',
-				type : 'post',
-				data : JSON.stringify({
-					id : $('#userid').val(),
-					korean : $('#korean').val(),
-					english : $('#english').val(),
-					math : $('#math').val(),
-					java : $('#java').val()}),
-				dataType : 'JSON',
-				contentType : 'application/json',
-				success : function(message) {
-					if (message === 'SUCCESS') {
-						location.href = "report.html"
-					} else {
-						location.href = "register.html"
-					}
-				},
-				error : function() {
-					alert('네트워크 실패')
-				}
+<script>
+$('#register_button').click(e =>{
+	e.preventDefault()
+	$('#result').html('')
+	$.ajax({
+		url: '/grade/register',
+		type: 'post',
+		data: JSON.stringify({userid : $('#userid').val(),
+			korean : $('#korean').val(),
+			english : $('#english').val(),
+			math : $('#math').val(),
+			java : $('#java').val()}),
+		dataType: 'json',
+		contentType: 'application/json',
+		
+		success : d => {
+			alert(d)
+		},
+		error : (req, x, err) =>{
+			alert(req.status + "\n" + req.responseText + "\n" + err)
+		}
+	})
+})
 
-			})
-		})
-	</script>
+$('#credit_button').click(e=>{
+	e.preventDefault()
+	$.ajax({
+		url : '/grade/report',
+		type : 'get',
+		dataType : 'json',
+		contentType : 'appliction/json',
+		success : d=>{
+			$('#result').html('<h3>학점 :'+d+'</h3>')
+		},
+		error :(req,x,err)=>{
+			alert(req.status + "\n" + req.responseText + "\n" + err)
+		}
+	})
+	
+})
+</script>
 </body>
 </html>

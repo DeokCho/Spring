@@ -99,17 +99,19 @@ footer {
 </footer>
 <script type="text/javascript">
 
-$('sum-button').click(function)(){
+$('sum-button').click(e=>{
+	e.preventDefault()
 	$.ajax({
-		url : '/grade/report',
+		url : '/grade/report/'+$('#name').val(),
 		type : 'post',
 		data :{},
 		dataType :'JSON',
 		contentType :'appliction/json',
-		success :function(message){
+		success :d => {
 			
-		}
-		error :'',
+		},
+		error :(req,x,err)=>{
+			alert(req.status + "\n" + req.responseText + "\n" + err)
 		
 	})
 })

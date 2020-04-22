@@ -1,6 +1,8 @@
 package com.occamsrazor.web.grade;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,15 +17,16 @@ public class GradeController {
 	@Autowired GradeService gradeService;
 
 	@PostMapping("/register")
-	public Messenger add(@RequestBody Grade grade) {
+	public Messenger register(@RequestBody Grade grade) {
 		int current = gradeService.count();
+		Messenger messenger = null;
 		gradeService.add(grade);
-		return (gradeService.count()==(current+1))? Messenger.SUCCESS : Messenger.FAIL;
+		return (gradeService.count() == current+1)? messenger.SUCCESS: messenger.FAIL;
 	}
 	
-	public Credit credit(@RequestBody Grade grade) {
-		Credit credit = null;
-		
-		return credit;
+	@GetMapping("/report/{userid}")
+	public Credit report(@PathVariable String userid) {
+		return gradeService.detail(userid);
 	}
+
 }

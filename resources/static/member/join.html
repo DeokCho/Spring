@@ -106,7 +106,7 @@ footer {
 <footer>
   <p>Footer</p>
 </footer>
-<script type="text/javascript">
+<script>
 
 $('#a-first').click(function(){
 	alert('London 클릭')
@@ -119,8 +119,8 @@ $('#a-third').click(function(){
 })
 
 
-$('#join-button').click(function(){
-	let m = {}
+$('#join-button').click(e => {
+	e.preventDefault()
 	$.ajax({
 		url: '/member/join',
 		type: 'post',
@@ -132,25 +132,22 @@ $('#join-button').click(function(){
 				addr: $('#addr').val()}),
 		dataType: 'json',
 		contentType: 'application/json',
-		success: function(message){
+		success: d => {
 			if(message === 'SUCCESS'){
 				location.href="../index.html"
 			}else{
 				location.href="join.html"
 			}
-			
 		},
-		error: function(){
-			alert('네트워킹 실패')
+		error: (request,status,error)=>{
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
 		}
-		
 	})
-	
-		
 })
-$('#cancel-button').click(function(){
-	alert('취소 버튼 클릭')
-})
+$('#cancel-button').click(e => {
+	e.preventDefault()
+	location.href="../index.html"
+		})
 </script>
 </body>
 </html>
