@@ -72,27 +72,32 @@ footer {
 <body>
 
 <header>
-  <h2>로그인</h2>
+  <h2>성적 입력</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a id="join_a">관리자 등록</a></li>
-      <li><a id="login_a">관리자 접속</a></li>
-      <li><a id="signup_a">사용자 가입</a></li>
-      <li><a id="signin_a">사용자 로그인</a></li>
+      <li><a id="join_a">Join</a></li>
+      <li><a id="login_a">Login</a></li>
     </ul>
   </nav>
   
   <article>
    <form action="#">
-   	<label>ID </label> <br>
-   	<input id="userId" type="text"> <br>
-   	<label>PASSWORD</label><br>
-   	<input id="passwd" type="text"><br>
-   	<input id="login-button" type="button" value="로그인">
-   	<input id="cancel-button" type="button" value="취소">
+   <label>ID</label><br>
+   <input id="userId" type="text"><br>
+   <label>국어</label><br>
+   <input id="korean" type="text"><br>
+   <label>영어</label><br>
+   <input id="english" type="text"><br>
+   <label>수학</label><br>
+   <input id="math" type="text"><br>
+   <label>자바</label><br>
+   <input id="java" type="text"><br>
+   <input id="grade_button" type="button" value="입력">
+   <input id="result_button" type="button" value="결과 확인">
+   
    </form>
   </article>
 </section>
@@ -101,69 +106,38 @@ footer {
   <p>Footer</p>
 </footer>
 
-<script type="text/javascript">
-$('#join_a')
-.css('cursor','pointer')
-.click(e=>{
-	e.preventDefault()
-	location.href = "member/join.html"
-})
-
-$('#login_a')
-	.css('cursor', 'pointer')
+<script>
+$('#grade_button')
+	.css('cursor','pointer')
 	.click(e => {
 		e.preventDefault()
-		location.href="index.html"
-		})
-		
-$('#login-button')
-	.css('cursor', 'pointer')
-	.click(e=>{
-		e.preventDefault()
 		$.ajax({
-			url : '/member/login',
+			url : '/grade/input',
 			type : 'post',
 			data : JSON.stringify({
-				userId : $("#userId").val(),
-				passwd : $("#passwd").val()
+				userId : $('#userId').val(),
+				korean : $('#korean').val(),
+				english : $('#english').val(),
+				math : $('#math').val(),
+				java : $('#java').val()
 			}),
-			dataType : 'JSON',
+			dataType : 'JSON', 
 			contentType : 'application/json',
-			success : (d=> {
+			success : d=>{
 				if(d==='SUCCESS'){
-					alert('로그인 성공')
-					location.href="/grade/grade.html"
-				}else{
-					alert('로그인 실패')
-					location.href = "index.html"
-				}
-			}),
+					aler('입력성공')
+					locaion.href="/grade/grade.html"
+				}else {
+				aler('실패')}
+				
+			},
 			error : (request, status, error)=>{
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
 			}
+				
 		})
 	})
 
-$('#cancel-button')
-	.css('cursor', 'pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="index.html"
-	})
-
-$('#signup_a')
-	.css('cursor', 'pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="/user/signup.html"
-	})
-	
-$('#signin_a')
-	.css('cursor','pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="/user/signin.html"
-	})
 </script>
 </body>
 </html>
