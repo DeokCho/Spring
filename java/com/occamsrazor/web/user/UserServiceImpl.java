@@ -1,14 +1,38 @@
 package com.occamsrazor.web.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-	private User[] users;
-	private int count;
-	
+	private Map<String, Object> map;
+
 	public UserServiceImpl() {
-		users = new User[5];
-		count=0;
+		map = new HashMap<>();
+	}
+	@Override
+	public void add(User user) {
+		map.put(user.getUserId(), user);
+	}
+	@Override
+	public int count() {
+		return map.size();
+	}
+	@Override
+	public User login(User user) {
+		User returnUser = null;
+		if(map.containsKey (user.getUserId())) {
+			User u = detail(user.getUserId());
+			if(user.getPasswd().equals(u.getPasswd())){
+				returnUser = u;
+			}
+		}		
+		return returnUser;
+	}
+	@Override
+	public User detail(String userid) {
+		return (User) map.get(userid);
 	}
 }

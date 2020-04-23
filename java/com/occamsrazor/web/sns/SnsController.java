@@ -1,4 +1,4 @@
-package com.occamsrazor.web.user;
+package com.occamsrazor.web.sns;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,26 +12,30 @@ import org.springframework.web.bind.annotation.RestController;
 import com.occamsrazor.web.uitl.Messenger;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
-	@Autowired UserService userService;
+@RequestMapping("/sns")
+public class SnsController {
+	@Autowired SnsService snsService;
 	
 	@PostMapping("/join")
-	public Messenger join(@RequestBody User user) {
-		int count = userService.count();
-		userService.add(user);
-		return (userService.count() == count+1)? Messenger.SUCCESS: Messenger.FAIL;
+	public Messenger join(@RequestBody Sns sns) {
+		int count = snsService.count();
+		snsService.add(sns);
+		return (snsService.count()==(count+1))? Messenger.SUCCESS: Messenger.FAIL;
 	}
+
 	@PostMapping("/login")
-	public Map<String, Object> login(@RequestBody User user) {
+	public Map<String, Object> login(Sns sns){
 		Map<String, Object> returnMap = new HashMap<>();
-		User loginUser = userService.login(user);
-		if(loginUser != null) {
-			returnMap.put("user", loginUser);
+		Sns returnLogin = snsService.login(sns);
+		if(returnLogin != null) {
+			returnMap.put("sns", returnLogin);
 			returnMap.put("messenger", Messenger.SUCCESS);
 		}else {
 			returnMap.put("messenger", Messenger.FAIL);
 		}
-		return returnMap; 
+		
+		return returnMap;
+		
 	}
+	
 }
