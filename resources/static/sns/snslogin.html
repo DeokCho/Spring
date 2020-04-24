@@ -78,12 +78,23 @@ footer {
 <section>
   <nav>
     <ul>
+    <li><a id="home_a">홈으로</a></li>
+    <li><a id="login">로그인</a></li>
+    <li><a id="join">회원가입</a></li>
     </ul>
   </nav>
   
   <article>
    <form action="#">
-
+	<label>아이디</label><br>
+	<input id="userid" type="text"><br>
+	<label>비밀번호</label><br>
+	<input id="passwd" type="text"><br>
+	<label>주민번호</label><br>
+	<br>
+	<input id="join_button" type="button" value="등록">
+	<input id="cancel_button" type="button" value="취소"><br>
+	
    </form>
   </article>
 </section>
@@ -93,6 +104,36 @@ footer {
 </footer>
 
 <script>
+
+$("#home_a")
+	.css('cursor','pointer')
+	.click(e=>{
+		e.preventDefault()
+		location.href="../index.html"
+	})
+$("#login")
+	.css('cursor','pointer')
+	.click(e=>{
+		e.preventDefault()
+		location.href="snslogin.html"
+	})
+$("#join")
+	.css('cursor','pointer')
+	.click(e=>{
+		e.preventDefault()
+		location.href="snsjoin.html"
+	})
+$("#join_button")
+	.css('cursor','pointer')
+	.click(e=>{
+		e.preventDefault()
+	})
+$("#cancel_button")
+	.css('cursor','pointer')
+	.click(e=>{
+		e.preventDefault()
+		location.href="../index.html"
+	})
 
 </script>
 </body>
