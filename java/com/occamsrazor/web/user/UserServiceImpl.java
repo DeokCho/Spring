@@ -33,6 +33,9 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public User detail(String userid) {
-		return (User) map.get(userid);
+		System.out.println("아이디 왔니? "+userid);
+		User t = (User) map.get(userid);
+		System.out.println("=================> "+ t);
+		return t;
 	}
 }

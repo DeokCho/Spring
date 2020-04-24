@@ -113,7 +113,7 @@ $('#join_a')
 		e.preventDefault()
 		location.href="sns_join.html"
 	})
-
+	
 $('#login_button')
 	.css('cursor','pointer')
 	.click(e=>{
@@ -121,20 +121,25 @@ $('#login_button')
 		$.ajax({
 			url : '/sns/login',
 			type : 'post',
-			data: ({
-				
+			data: JSON.stringify({
+				userid : $('#userid').val(),
+				passwd : $('#passwd').val()
 			}),
-			dataType : 'JSON',
+			dataType : 'json',
 			contentType : 'application/json',
 			success : d=>{
-				
+				if(d.messenger === 'SUCCESS'){
+					alert('성공')
+				}else{
+					alert('실패')
+				}
 			},
-			error : (q,x,e)=>{
-				alert(q.status)
-			})
-			
+			error : (request,status,error)=>{
+				alert(request.status+"\n"+request.responseText+"\n"+error)
+			}
 		})
 	})
+
 
 </script>
 </body>

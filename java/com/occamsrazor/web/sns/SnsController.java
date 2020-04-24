@@ -33,7 +33,6 @@ public class SnsController {
 		}else {
 			returnMap.put("messenger", Messenger.FAIL);
 		}
-		
 		return returnMap;
 		
 	}

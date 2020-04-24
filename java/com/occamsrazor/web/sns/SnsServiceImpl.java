@@ -3,6 +3,8 @@ package com.occamsrazor.web.sns;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.soap.Detail;
+
 import org.springframework.stereotype.Service;
 
 import com.occamsrazor.web.uitl.Messenger;
@@ -26,10 +28,22 @@ public class SnsServiceImpl implements SnsService{
 	}
 
 	@Override
-	public void login(Sns sns) {
-	
-		
+	public Sns login(Sns sns) {
+		Sns returnSns = null;
+		if(map.containsKey(sns.getUserId())) {
+			Sns s = Detail(sns.getUserId());
+			if(sns.getPasswd().equals(s.getPasswd())) {
+				returnSns = s;
+			}
+		}
+		return sns;
 	}
+
+	private Sns Detail(String userId) {
+		return (Sns) map.get(userId);
+	}
+	
+	
 	
 	
 	
