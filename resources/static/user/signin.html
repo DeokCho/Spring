@@ -123,6 +123,7 @@ $('#login_button')
 			contentType :'application/json',
 			success : d=> {
 				if(d.messenger === 'SUCCESS'){
+					sessionStorage.setItem('userId', d.user.userId)
 					location.href = 'mypage.html'
 				}else{
 					location.href = 'signin.html'
