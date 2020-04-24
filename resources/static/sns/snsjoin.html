@@ -72,29 +72,18 @@ footer {
 <body>
 
 <header>
-  <h2>비회원 회원가입</h2>
+  <h2>비회원 로그인</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-    <li><a id="home_b">홈으로</a></li>
-    <li><a id="join_a">회원가입</a></li>
     </ul>
   </nav>
   
   <article>
    <form action="#">
-   <label>이름</label><br>
-   <input id="name" type="text"><br> 
-   <label>ID</label><br>
-   <input id="userId" type="text"><br> 
-   <label>PASSWORD</label><br>
-   <input id="passwd" type="text"><br> 
-   <br>
-   <input id="join_button" type="button" value="입력완료">
-   <input id="cancel_button" type="button" value="취소">
-   
+
    </form>
   </article>
 </section>
@@ -104,49 +93,7 @@ footer {
 </footer>
 
 <script>
-$('#join_a')
-	.css('cursor','pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="sns_join.html"
-	})
-$('#home_b')
-	.css('cursor','pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="../index.html"
-	})
-		
-	
-	
-$('#join_button')
-	.css('cursor','pointer')
-	.click(e=>{
-		e.preventDefault()
-		$.ajax({
-			url :'/sns/join',
-			type : 'post',
-			data :	JSON.stringify({
-				name : $("#name").val(),
-				userId : $("#userId").val(),
-				passwd : $("#passwd").val()
-			}),
-			dataType : 'JSON',
-			contentType :'application/json',
-			success : (d=>{
-				if(d==='SUCCESS'){
-					alert('회원가입 성공')
-					location.href="../index.html"
-				}else{
-					alert('회원가입 실패')
-					location.href="../index.html"
-				}
-			}),
-			error : (request, status, error)=>{
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
-			}
-		})
-	})
+
 </script>
 </body>
 </html>

@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
 		return returnUser;
 	}
 	@Override
-	public User detail(String userid) {
-		return (User) map.get(userid);
+	public User detail(String userId) {
+		return (User) map.get(userId);
 	}
 	@Override
 	public boolean update(User user) {
@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 	@Override
-	public boolean remove(String userid) {
-		map.remove(userid);
+	public boolean remove(String userId) {
+		map.remove(userId);
 		return true;
 	}
 }

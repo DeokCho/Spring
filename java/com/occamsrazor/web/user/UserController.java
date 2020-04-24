@@ -38,9 +38,9 @@ public class UserController {
 		}
 		return returnMap; 
 	}
-	@GetMapping("/detail/{userid}")
-	public User detail(@PathVariable String userid) {
-		return userService.detail(userid);
+	@GetMapping("/detail/{userId}")
+	public User detail(@PathVariable String userId) {
+		return userService.detail(userId);
 	}
 	
 	@PutMapping("/update")
@@ -50,9 +50,9 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/remove/{userId}")
-	public Messenger remove(@PathVariable String userid) {
-		System.out.println("삭제 : "+userid);
-		return (userService.remove(userid))?Messenger.SUCCESS:Messenger.FAIL;
+	public Messenger remove(@PathVariable String userId) {
+		System.out.println("삭제 : "+userId);
+		return (userService.remove(userId))? Messenger.SUCCESS:Messenger.FAIL;
 	}
 	
 }

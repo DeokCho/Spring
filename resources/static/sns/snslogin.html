@@ -78,19 +78,12 @@ footer {
 <section>
   <nav>
     <ul>
-    <li><a id="home_b">홈으로</a></li>
-     <li><a id="join_a">회원가입</a></li>
     </ul>
   </nav>
   
   <article>
    <form action="#">
-   	<label>ID</label><br>
-   	<input a="userid" type="text"><br>
-   	<label>PASSWORD</label><br>
-   	<input a="passwd" type="text"><br>
-   	<input a="login_button" type="button" value="로그인">
-   	<input a="cancel_button" type="button" value="취소">
+
    </form>
   </article>
 </section>
@@ -100,46 +93,6 @@ footer {
 </footer>
 
 <script>
-$('#home_b')
-	.css('cursor','pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="../index.html"
-	})
-
-$('#join_a')
-	.css('cursor','pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="sns_join.html"
-	})
-	
-$('#login_button')
-	.css('cursor','pointer')
-	.click(e=>{
-		e.preventDefault()
-		$.ajax({
-			url : '/sns/login',
-			type : 'post',
-			data: JSON.stringify({
-				userid : $('#userid').val(),
-				passwd : $('#passwd').val()
-			}),
-			dataType : 'json',
-			contentType : 'application/json',
-			success : d=>{
-				if(d.messenger === 'SUCCESS'){
-					alert('성공')
-				}else{
-					alert('실패')
-				}
-			},
-			error : (request,status,error)=>{
-				alert(request.status+"\n"+request.responseText+"\n"+error)
-			}
-		})
-	})
-
 
 </script>
 </body>

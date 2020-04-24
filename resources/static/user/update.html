@@ -87,31 +87,32 @@
           });
         }, false);
       })();
+      
+      
+      
       $.getJSON('/user/detail/'+sessionStorage.getItem('userId'),d =>{
     	  $('#name').val(d.name)
     	  $('#userId').text(d.userId)
     	  $('#addr').val(d.addr)
     	  $('#ssn').text(d.ssn)
     	  $('#passwd').val(d.passwd)
-    	  
-      })
-      
-      
-      $('#cancel_button')
+    	      	const name = $('#name').val()
+    			const addr = $('#addr').val()
+    			const passwd = $('#passwd').val()
+    	 $('#cancel_button')
     	.css('cursor','pointer')
     	.click(e=>{
     		e.preventDefault()
     		location.href='mypage.html'
-    	})
-    	
-    	const name = $('#name').val()
-    	const addr = $('#addr').val()
-    	const passwd = $('#passwd').val()
+      })
     	
     	$('#confirm_button')
     	.css('cursor','pointer')
     	.click(e=>{
     		e.preventDefault()
+    		alert(' 수정 하려는 정보 >>>>>>>> '
+    				+$('#name').val()  +','+$('#addr').val() 
+    				+','+$('#passwd').val())
     		if(name === $('#name').val() 
     			&& addr === $('#addr').val()
     			&& passwd === $('#passwd').val()){
@@ -132,9 +133,10 @@
     				success : d=>{
     					if(d === 'SUCCESS'){
     						location.href='mypage.html'
-    					}else{}
+    					}else{
     						alert('수정 실패')
     						location.href='update.html'
+    					}
     				},
     				error : (r,x,e) =>{
     					alert(r.status)
@@ -147,19 +149,16 @@
     		.click(e=>{
     			e.preventDefault()
     			$.ajax({
-    				url:'/user/remove'+sessionStorage.getItem('userId'),
+    				url:'/user/remove/'+sessionStorage.getItem('userId'),
     				type:'delete',
 					dataType:'json',
 					contentType:'application/json',
 					success : d=>{
-						if(d ==='SUCCESS'){
-							alert('탈퇴처리완료')
-							sessionStorage.setItem('userId','')
-							location.href = "../index.html"
-						}
-					}
-    			})
+						alert('과연?')
+    				}
+				})
     		})
+      })
     	
     </script>
 </body>

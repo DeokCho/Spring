@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class Sns {
-	private String name, userId, passwd, ssn, addr;
-	
+	private String name, userid, passwd, ssn, addr;
 }
