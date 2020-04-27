@@ -130,7 +130,8 @@ $('#login')
 })	
 
 $('#join')
-.css('cursor','pointer').click(e=>{
+	.css('cursor','pointer')
+	.click(e=>{
 	e.preventDefault()
 	$.ajax({
 		url : '/sns/join',
@@ -141,6 +142,7 @@ $('#join')
 			passwd : $('#passwd').val(),
 			ssn : $('#ssn').val(),
 			addr : $('#addr').val()
+		}),
 		dataType:'json',
 		contentType : 'application/json',
 		success : d=>{
@@ -154,7 +156,6 @@ $('#join')
 		}
 	})
 })	
-})
 
 
 </script>
