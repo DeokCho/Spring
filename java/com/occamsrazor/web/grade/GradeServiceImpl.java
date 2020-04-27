@@ -2,8 +2,8 @@ package com.occamsrazor.web.grade;
 
 import org.springframework.stereotype.Service;
 
-import com.occamsrazor.web.uitl.Credit;
-import com.occamsrazor.web.uitl.Messenger;
+import com.occamsrazor.web.util.Credit;
+import com.occamsrazor.web.util.Messenger;
 
 @Service
 public class GradeServiceImpl implements GradeService {

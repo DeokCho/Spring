@@ -78,22 +78,22 @@ footer {
 <section>
   <nav>
     <ul>
-      <li><a id="join_a">관리자 등록</a></li>
+      <li><a id="join_a" >관리자 등록</a></li>
       <li><a id="login_a">관리자 접속</a></li>
-      <li><a id="signup_a">사용자 가입</a></li>
+      <li><a id="signup_a" >사용자 가입</a></li>
       <li><a id="signin_a">사용자 로그인</a></li>
-      <li><a id="sns_a">SNS로그인</a></li>
     </ul>
   </nav>
   
   <article>
    <form action="#">
    	<label>ID </label> <br>
-   	<input id="userId" type="text"> <br>
+   	<input id="userid" type="text"/> <br>
    	<label>PASSWORD</label><br>
-   	<input id="passwd" type="text"><br>
+   	<input id="passwd" type="text"/><br>
    	<input id="login-button" type="button" value="로그인">
    	<input id="cancel-button" type="button" value="취소">
+   	
    </form>
   </article>
 </section>
@@ -101,77 +101,57 @@ footer {
 <footer>
   <p>Footer</p>
 </footer>
-
 <script type="text/javascript">
 $('#join_a')
-.css('cursor','pointer')
-.click(e=>{
-	e.preventDefault()
-	location.href = "member/join.html"
+	.css('cursor','pointer')
+	.click(e=>{
+		e.preventDefault()
+		location.href = "member/join.html"
 })
-
 $('#login_a')
-	.css('cursor', 'pointer')
-	.click(e => {
-		e.preventDefault()
-		location.href="index.html"
-		})
-		
-$('#login-button')
-	.css('cursor', 'pointer')
+	.css('cursor','pointer')
 	.click(e=>{
 		e.preventDefault()
-		$.ajax({
-			url : '/member/login',
-			type : 'post',
-			data : JSON.stringify({
-				userId : $("#userId").val(),
-				passwd : $("#passwd").val()
-			}),
-			dataType : 'JSON',
-			contentType : 'application/json',
-			success : (d=> {
-				if(d==='SUCCESS'){
-					alert('로그인 성공')
-					location.href="member/members.html"
-				}else{
-					alert('로그인 실패')
-					location.href = "index.html"
-				}
-			}),
-			error : (request, status, error)=>{
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
-			}
-		})
-	})
-
-$('#cancel-button')
-	.css('cursor', 'pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="index.html"
-	})
-
+		location.href = "index.html"
+})
 $('#signup_a')
-	.css('cursor', 'pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="/user/signup.html"
-	})
-	
+	.css('cursor','pointer')
+	.click(e => {
+	e.preventDefault()
+	location.href = "user/signup.html"
+})
 $('#signin_a')
 	.css('cursor','pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="/user/signin.html"
+	.click(e => {
+	e.preventDefault()
+	location.href = "user/signin.html"
+})
+$('#login-button').click(e =>{
+	e.preventDefault()
+	$.ajax({
+		url: '/member/login',
+		type: 'post',
+		data: JSON.stringify(
+				{userid: $('#userid').val(),
+				 passwd: $('#passwd').val()}),
+		dataType: 'json',
+		contentType: 'application/json',
+		success : d => {
+			if(d === 'SUCCESS'){
+				location.href = "member/list.html"
+			}else{
+				alert('다시 로그인 해주세요')
+				location.href = "index.html"
+			}
+		},
+		error: (request,status,error)=>{
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+		}
 	})
+})
+$('#cancel-button').click(function(){
 	
-$('#sns_a')
-	.css('cursor','pointer')
-	.click(e=>{
-		e.preventDefault()
-		location.href="/sns/snslogin.html"
-	})
+})
 </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.occamsrazor.web.grade;
 
-import com.occamsrazor.web.uitl.Credit;
+import com.occamsrazor.web.util.Credit;
 
 public interface GradeService {
 	public void input(Grade grade);
