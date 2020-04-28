@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService{
 	private Map<String, Object> map;
-	public final static String FILE_PATH = "C:\\Users\\user\\spring-workspace\\occamsrazor\\src\\main\\resources\\static\\member\\";
+	public final static String FILE_PATH = "C:\\Users\\bit\\spring-workspace\\occamsrazor\\src\\main\\resources\\static\\user\\";
 	public UserServiceImpl() {
 		map = new HashMap<>();
 	}
@@ -56,7 +56,6 @@ public class UserServiceImpl implements UserService{
 		return t;
 	}
 
-	
 	@Override
 	public boolean update(User user) {
 		map.replace(user.getUserid(), user);
@@ -89,7 +88,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void saveFile(User user) {
 		try {
-			File file = new File(FILE_PATH+"list.txt");
+			File file = new File(FILE_PATH+"list.csv");
 			@SuppressWarnings("resource")
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 					String message = user.toString();
@@ -108,7 +107,7 @@ public class UserServiceImpl implements UserService{
 		List<User> userlist = new ArrayList<>();
 		List<String> list = new ArrayList<>();
 		try {
-			File file = new File(FILE_PATH+"list.txt");
+			File file = new File(FILE_PATH+"list.csv");
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String message = "";
 			while((message = reader.readLine()) != null) {
@@ -139,8 +138,14 @@ public class UserServiceImpl implements UserService{
 		for(int i=0; i<list.size(); i++) {
 			if(userid.equals(list.get(i).getUserid())) {
 				ok = false;
+				break;
 			}
 		}
+		
+		/*User id = (User) map.get(userid);
+		if(userid.equals(id.getUserid())) {
+			ok=false;
+		}*/
 		return ok;
 	}
 }
