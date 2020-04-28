@@ -62,4 +62,9 @@ public class UserController {
 		return (userService.remove(userid)) ? Messenger.SUCCESS: Messenger.FAIL;
 	}
 
+	@GetMapping("/idsearch/{userid}")
+	public Messenger idSearch(@PathVariable String userid) {
+		return (userService.idsearch(userid))? Messenger.SUCCESS: Messenger.FAIL;
+		
+	}
 }

@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService{
 	private Map<String, Object> map;
-	public final static String FILE_PATH = "C:\\Users\\bit\\spring-workspace\\occamsrazor\\src\\main\\resources\\static\\user\\";
+	public final static String FILE_PATH = "C:\\Users\\user\\spring-workspace\\occamsrazor\\src\\main\\resources\\static\\member\\";
 	public UserServiceImpl() {
 		map = new HashMap<>();
 	}
@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService{
 		return t;
 	}
 
+	
 	@Override
 	public boolean update(User user) {
 		map.replace(user.getUserid(), user);
@@ -117,8 +118,9 @@ public class UserServiceImpl implements UserService{
 		} catch(Exception e) {
 			System.out.println("파일 읽기에서 에러 발생");
 		}
-		User u = new User();
+		User u = null;
 		for(int i =0;i < list.size(); i++) {
+			u = new User();
 			String[] arr = list.get(i).split(",");
 			u.setUserid(arr[0]);
 			u.setPasswd(arr[1]);
@@ -128,5 +130,17 @@ public class UserServiceImpl implements UserService{
 			userlist.add(u);
 		}
 		return userlist;
+	}
+
+	@Override
+	public boolean idsearch(String userid) {
+		boolean ok = true;
+		List<User> list = readFile();
+		for(int i=0; i<list.size(); i++) {
+			if(userid.equals(list.get(i).getUserid())) {
+				ok = false;
+			}
+		}
+		return ok;
 	}
 }

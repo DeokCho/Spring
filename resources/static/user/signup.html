@@ -87,7 +87,7 @@ footer {
    	<label>NAME </label> <br>
    	<input id="name" type="text"/> <br>
    	<label>ID</label><br>
-   	<input id="userid" type="text"/><br>
+   	<input id="userid" type="text"/><input id="idsearch" type="button" value="중복확인"><br>
    	<label>PASSWORD</label><br>
    	<input id="passwd" type="text"/><br>
    	<label>SSN</label><br>
@@ -139,6 +139,13 @@ $('#join_button')
 		
 	})
 	
+})
+
+$('#idsearch').css('cursor','pointer').click(e=>{
+	e.preventDefault()
+	$.getJSON('/user/idsearch/'+$('#userid').val(),d=>{
+		alert((d==='SUCCESS')? '아이디 가능' : '아이디 중복')
+	})
 })
 
 </script>
